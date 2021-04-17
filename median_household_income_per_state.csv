@@ -1,103 +1,103 @@
 state_name_full,median_income,state_name_abbrev,year
-Alabama,"55,935.00",AL,2020
-Alaska,"78,038.00",AK,2020
-Arizona,"70,080.00",AZ,2020
-Arkansas,"54,322.00",AR,2020
-California,"78,002.00",CA,2020
-Colorado,"72,400.00",CO,2020
-Connecticut,"87,005.00",CT,2020
-Delaware,"74,051.00",DE,2020
-District of Columbia,"93,000.00",DC,2020
-Florida,"58,150.00",FL,2020
-Georgia,"56,480.00",GA,2020
-Hawaii,"88,101.00",HI,2020
-Idaho,"65,326.00",ID,2020
-Illinois,"74,030.00",IL,2020
-Indiana,"66,882.00",IN,2020
-Iowa,"65,635.00",IA,2020
-Kansas,"73,110.00",KS,2020
-Kentucky,"55,520.00",KY,2020
-Louisiana,"51,760.00",LA,2020
-Maine,"65,800.00",MA,2020
-Maryland,"95,310.00",MD,2020
-Massachusetts,"87,264.00",MA,2020
-Michigan,"63,769.00",MI,2020
-Minnesota,"81,260.00",MN,2020
-Mississippi,"44,092.00",MS,2020
-Missouri,"60,010.00",MO,2020
-Montana,"60,000.00",MT,2020
-Nebraska,"73,000.00",NE,2020
-Nevada,"70,627.00",NV,2020
-New Hampshire,"86,800.00",NH,2020
-New Jersey,"87,352.00",NJ,2020
-New Mexico,"53,021.00",NM,2020
-New York,"71,300.00",NY,2020
-North Carolina,"60,300.00",NC,2020
-North Dakota,"70,000.00",ND,2020
-Ohio,"64,782.00",OH,2020
-Oklahoma,"59,303.00",OK,2020
-Oregon,"73,900.00",OR,2020
-Pennsylvania,"69,913.00",PA,2020
-Rhode Island,"70,002.00",RI,2020
-South Carolina,"61,476.00",SC,2020
-South Dakota,"63,600.00",SD,2020
-Tennessee,"56,615.00",TN,2020
-Texas,"67,280.00",TX,2020
-Utah,"84,517.00",UT,2020
-Vermont,"73,800.00",VT,2020
-Virginia,"81,000.00",VA,2020
-Washington,"82,175.00",WA,2020
-West Virginia,"53,520.00",WV,2020
-Wisconsin,"67,163.00",WI,2020
-Wyoming,"64,587.00",WY,2020
-Alabama,"49,396.00",AL,2019
-Alaska,"68,400.00",AK,2019
-Arizona,"62,311.00",AZ,2019
-Arkansas,"49,778.00",AR,2019
-California,"70,001.00",CA,2019
-Colorado,"72,620.00",CO,2019
-Connecticut,"73,011.00",CT,2019
-Delaware,"65,002.00",DE,2019
-District of Columbia,"85,101.00",DC,2019
-Florida,"54,401.00",FL,2019
-Georgia,"56,000.00",GA,2019
-Hawaii,"80,000.00",HI,2019
-Idaho,"58,729.00",ID,2019
-Illinois,"70,000.00",IL,2019
-Indiana,"59,690.00",IN,2019
-Iowa,"68,844.00",IA,2019
-Kansas,"63,726.00",KS,2019
-Kentucky,"54,616.00",KY,2019
-Louisiana,"49,665.00",LA,2019
-Maine,"58,001.00",MA,2019
-Maryland,"86,051.00",MD,2019
-Massachusetts,"86,651.00",MA,2019
-Michigan,"60,002.00",MI,2019
-Minnesota,"72,070.00",MN,2019
-Mississippi,"43,000.00",MS,2019
-Missouri,"61,110.00",MO,2019
-Montana,"58,000.00",MT,2019
-Nebraska,"67,653.00",NE,2019
-Nevada,"61,900.00",NV,2019
-New Hampshire,"81,000.00",NH,2019
-New Jersey,"74,100.00",NJ,2019
-New Mexico,"48,000.00",NM,2019
-New York,"67,105.00",NY,2019
-North Carolina,"52,943.00",NC,2019
-North Dakota,"66,005.00",ND,2019
-Ohio,"61,398.00",OH,2019
-Oklahoma,"54,005.00",OK,2019
-Oregon,"69,358.00",OR,2019
-Pennsylvania,"64,305.00",PA,2019
-Rhode Island,"62,341.00",RI,2019
-South Carolina,"57,090.00",SC,2019
-South Dakota,"59,344.00",SD,2019
-Tennessee,"55,601.00",TN,2019
-Texas,"59,703.00",TX,2019
-Utah,"76,613.00",UT,2019
-Vermont,"69,844.00",VT,2019
-Virginia,"76,786.00",VA,2019
-Washington,"79,801.00",WA,2019
-West Virginia,"50,180.00",WV,2019
-Wisconsin,"62,676.00",WI,2019
-Wyoming,"62,002.00",WY,2019
+Alabama,55935.00,AL,2020
+Alaska,78038.00,AK,2020
+Arizona,70080.00,AZ,2020
+Arkansas,54322.00,AR,2020
+California,78002.00,CA,2020
+Colorado,72400.00,CO,2020
+Connecticut,87005.00,CT,2020
+Delaware,74051.00,DE,2020
+District of Columbia,93000.00,DC,2020
+Florida,58150.00,FL,2020
+Georgia,56480.00,GA,2020
+Hawaii,88101.00,HI,2020
+Idaho,65326.00,ID,2020
+Illinois,74030.00,IL,2020
+Indiana,66882.00,IN,2020
+Iowa,65635.00,IA,2020
+Kansas,73110.00,KS,2020
+Kentucky,55520.00,KY,2020
+Louisiana,51760.00,LA,2020
+Maine,65800.00,MA,2020
+Maryland,95310.00,MD,2020
+Massachusetts,87264.00,MA,2020
+Michigan,63769.00,MI,2020
+Minnesota,81260.00,MN,2020
+Mississippi,44092.00,MS,2020
+Missouri,60010.00,MO,2020
+Montana,60000.00,MT,2020
+Nebraska,73000.00,NE,2020
+Nevada,70627.00,NV,2020
+New Hampshire,86800.00,NH,2020
+New Jersey,87352.00,NJ,2020
+New Mexico,53021.00,NM,2020
+New York,71300.00,NY,2020
+North Carolina,60300.00,NC,2020
+North Dakota,70000.00,ND,2020
+Ohio,64782.00,OH,2020
+Oklahoma,59303.00,OK,2020
+Oregon,73900.00,OR,2020
+Pennsylvania,69913.00,PA,2020
+Rhode Island,70002.00,RI,2020
+South Carolina,61476.00,SC,2020
+South Dakota,63600.00,SD,2020
+Tennessee,56615.00,TN,2020
+Texas,67280.00,TX,2020
+Utah,84517.00,UT,2020
+Vermont,73800.00,VT,2020
+Virginia,81000.00,VA,2020
+Washington,82175.00,WA,2020
+West Virginia,53520.00,WV,2020
+Wisconsin,67163.00,WI,2020
+Wyoming,64587.00,WY,2020
+Alabama,49396.00,AL,2019
+Alaska,68400.00,AK,2019
+Arizona,62311.00,AZ,2019
+Arkansas,49778.00,AR,2019
+California,70001.00,CA,2019
+Colorado,72620.00,CO,2019
+Connecticut,73011.00,CT,2019
+Delaware,65002.00,DE,2019
+District of Columbia,85101.00,DC,2019
+Florida,54401.00,FL,2019
+Georgia,56000.00,GA,2019
+Hawaii,80000.00,HI,2019
+Idaho,58729.00,ID,2019
+Illinois,70000.00,IL,2019
+Indiana,59690.00,IN,2019
+Iowa,68844.00,IA,2019
+Kansas,63726.00,KS,2019
+Kentucky,54616.00,KY,2019
+Louisiana,49665.00,LA,2019
+Maine,58001.00,MA,2019
+Maryland,86051.00,MD,2019
+Massachusetts,86651.00,MA,2019
+Michigan,60002.00,MI,2019
+Minnesota,72070.00,MN,2019
+Mississippi,43000.00,MS,2019
+Missouri,61110.00,MO,2019
+Montana,58000.00,MT,2019
+Nebraska,67653.00,NE,2019
+Nevada,61900.00,NV,2019
+New Hampshire,81000.00,NH,2019
+New Jersey,74100.00,NJ,2019
+New Mexico,48000.00,NM,2019
+New York,67105.00,NY,2019
+North Carolina,52943.00,NC,2019
+North Dakota,66005.00,ND,2019
+Ohio,61398.00,OH,2019
+Oklahoma,54005.00,OK,2019
+Oregon,69358.00,OR,2019
+Pennsylvania,64305.00,PA,2019
+Rhode Island,62341.00,RI,2019
+South Carolina,57090.00,SC,2019
+South Dakota,59344.00,SD,2019
+Tennessee,55601.00,TN,2019
+Texas,59703.00,TX,2019
+Utah,76613.00,UT,2019
+Vermont,69844.00,VT,2019
+Virginia,76786.00,VA,2019
+Washington,79801.00,WA,2019
+West Virginia,50180.00,WV,2019
+Wisconsin,62676.00,WI,2019
+Wyoming,62002.00,WY,2019
