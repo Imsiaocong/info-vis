@@ -1,0 +1,86 @@
+state_name_full,median_income,year,population
+Alabama,55935,2020,NAN
+Arkansas,54322,2020,NAN
+Delaware,74051,2020,NAN
+District of Columbia,93000,2020,NAN
+Florida,58150,2020,NAN
+Georgia,56480,2020,NAN
+Kentucky,55520,2020,NAN
+Louisiana,51760,2020,NAN
+Maryland,95310,2020,NAN
+Mississippi,44092,2020,NAN
+North Carolina,60300,2020,NAN
+Oklahoma,59303,2020,NAN
+South Carolina,61476,2020,NAN
+Tennessee,56615,2020,NAN
+Texas,67280,2020,NAN
+Virginia,81000,2020,NAN
+West Virginia,53520,2020,NAN
+Alabama,49396,2019,"4,903,185"
+Arkansas,49778,2019,"3,017,804"
+Delaware,65002,2019,"973,764"
+District of Columbia,85101,2019,"705,749"
+Florida,54401,2019,"21,477,737"
+Georgia,56000,2019,"10,617,423"
+Kentucky,54616,2019,"4,467,673"
+Louisiana,49665,2019,"4,648,794"
+Maryland,86051,2019,"6,045,680"
+Mississippi,43000,2019,"2,976,149"
+North Carolina,52943,2019,"10,488,084"
+Oklahoma,54005,2019,"3,956,971"
+South Carolina,57090,2019,"5,148,714"
+Tennessee,55601,2019,"6,829,174"
+Texas,59703,2019,"28,995,881"
+Virginia,76786,2019,"8,535,519"
+West Virginia,50180,2019,"1,792,147"
+Alabama,49861,2018,"4,887,681"
+Arkansas,47062,2018,"3,009,733"
+Delaware,64805,2018,"965,479"
+District of Columbia,85203,2018,"701,547"
+Florida,55462,2018,"21,244,317"
+Georgia,58756,2018,"10,511,131"
+Kentucky,50247,2018,"4,461,153"
+Louisiana,47905,2018,"4,659,690"
+Maryland,83242,2018,"6,035,802"
+Mississippi,44717,2018,"2,981,020"
+North Carolina,53855,2018,"10,381,615"
+Oklahoma,51924,2018,"3,940,235"
+South Carolina,52306,2018,"5,084,156"
+Tennessee,52375,2018,"6,771,631"
+Texas,60629,2018,"28,628,666"
+Virginia,72577,2018,"8,501,286"
+West Virginia,44097,2018,"1,804,291"
+Alabama,48123,2017,"4,874,486"
+Arkansas,45869,2017,"3,001,345"
+Delaware,62852,2017,"956,823"
+District of Columbia,82372,2017,"694,906"
+Florida,52594,2017,"20,963,613"
+Georgia,56183,2017,"10,410,330"
+Kentucky,48375,2017,"4,452,268"
+Louisiana,46145,2017,"4,670,560"
+Maryland,80776,2017,"6,023,868"
+Mississippi,43529,2017,"2,988,510"
+North Carolina,52752,2017,"10,268,233"
+Oklahoma,50051,2017,"3,931,316"
+South Carolina,50570,2017,"5,021,268"
+Tennessee,51340,2017,"6,708,799"
+Texas,59206,2017,"28,295,273"
+Virginia,71535,2017,"8,463,587"
+West Virginia,43469,2017,"1,817,004"
+Alabama,46257,2016,"4,863,525"
+Arkansas,45869,2016,"2,989,918"
+Delaware,62852,2016,"948,921"
+District of Columbia,75506,2016,"685,815"
+Florida,50860,2016,"20,613,477"
+Georgia,53559,2016,"10,301,890"
+Kentucky,46659,2016,"4,438,182"
+Louisiana,45146,2016,"4,678,135"
+Maryland,78945,2016,"6,003,323"
+Mississippi,41754,2016,"2,987,938"
+North Carolina,50584,2016,"10,154,788"
+Oklahoma,49176,2016,"3,926,331"
+South Carolina,49501,2016,"4,957,968"
+Tennessee,48547,2016,"6,646,010"
+Texas,56565,2016,"27,914,410"
+Virginia,68114,2016,"8,410,106"
+West Virginia,43385,2016,"1,831,023"
