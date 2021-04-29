@@ -1,0 +1,149 @@
+
+@font-face{
+	font-family: 'cool fonts';
+	src: 
+	url('fonts/AbhayaLibre-Medium.ttf');
+}
+
+body{
+	margin: 0;
+	background-color: hsl(0, 100%, 100%);
+}
+
+#sort_btn_2{
+	margin-top: 5px;
+}
+
+button{
+	display: block; 
+	border-radius: 10px;
+	margin-top: 20px;
+	text-align: center;
+	transition: all 0.5s;
+	cursor: pointer;
+	padding: 3px;
+}
+
+button:hover{
+	background-color: orange;
+}
+
+#bg_color_btn{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#bg_color_btn:hover{
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#slider{
+	width: 290px;
+}
+
+#infovis{
+	width: 1150px;
+}
+
+#scatter{
+	margin-right: 20px;
+}
+
+#container{
+	max-width: 60em;
+	margin: auto;
+}
+
+header, nav, footer{
+	padding: 1em;
+}
+
+h1, p, nav{
+	font-family: 'cool fonts', sans-serif;
+}
+
+#date{
+	font-size: 15px;
+	text-align: center;
+	/* color: deepskyblue; */
+	color: black;
+	text-decoration: underline overline wavy fuchsia;
+}
+
+nav{
+	display: flex;
+	flex-direction: column;
+}
+
+main{
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.3em;
+}
+
+img{
+	display: block;
+	width: 100%;
+	height: auto;
+	transition: opacity 500ms;
+}
+
+a.pic:hover{
+	opacity: 0.6;
+	background-color: orange;
+}
+
+#forum{
+	padding: 1em;
+	padding-bottom: 0;
+}
+
+a:link, a:visited{
+	color: black;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition-property: background-color;
+  	transition-duration: 250ms;
+}
+
+h1 > a:link, h1 > a:visited{
+	text-transform: none;
+}
+
+a:hover{
+	background-color: lightblue;
+}
+
+a:active{
+	background-color: yellow;
+}
+
+.selected {
+  background-color: cyan;
+}
+
+@media(min-width: 40em){
+  nav{
+    flex-direction: row;
+  }
+
+  nav > a{
+    margin-right: 1em;
+  }
+
+  main{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.land {
+    fill:rgb(141, 155, 136);
+} 
+.interiors {
+    fill: none;
+    stroke: #C0C0BB;
+    stroke-width: 1px;
+} 
+.boundary {
+    fill: #9a9e9e;
+    stroke: #C0C0BB;
+}

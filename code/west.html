@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>U.S. Median Household Income</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/money_icon.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://d3js.org/d3-path.v2.min.js"></script>
+  <script src="https://d3js.org/d3-shape.v2.min.js"></script>
+  <script crossingin src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script crossingin src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script crossingin src="https://unpkg.com/babel-standalone/babel.js"></script>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1><a href="index.html">U.S. Median Household Income - The West Region</a></h1>
+    </header>
+
+    <nav>
+      <a href="midwest.html">The Midwest</a>
+      <a href="northeast.html">The Northeast</a>
+      <a href="west.html" class="selected">The West</a>
+      <a href="south.html">The South</a>
+    </nav>
+
+    <main>
+      <div id="root"></div>
+        <script type='text/babel'>
+            const margin = { top: 20, right: 20, bottom: 180, left: 40, gap: 50 };
+            const csvUrl = 'https://raw.githubusercontent.com/M2JT/info-vis/main/west_with_pop.csv';
+            
+            function YAxis(props) {
+                if('axisLable_sca' in props){
+                    const { yScale, height, axisLable_sca } = props;
+                    return <g>
+                        {<line y2={height} stroke='black'/>}
+                        {yScale.ticks().map(tickValue => 
+                            <g key={tickValue} transform={`translate(-10, ${yScale(tickValue)})`}>
+                                <line x2={10} stroke='black' />
+                                <text style={{ textAnchor:'end', fontSize:'12px' }} >
+                                    {tickValue}
+                                </text>
+                            </g>
+                        )}
+                        <text style={{ textAnchor:'end', fontSize:'15px'}} transform={`translate(20, 0)rotate(-90)`}>
+                            {axisLable_sca}
+                        </text>
+                    </g>
+                }
+                else{
+                    const { yScale, height, axisLable } = props;
+                    return <g>
+                        {<line y2={height} stroke='black'/>}
+                        {yScale.ticks().map(tickValue => 
+                            <g key={tickValue} transform={`translate(-10, ${yScale(tickValue)})`}>
+                                <line x2={10} stroke='black' />
+                                <text style={{ textAnchor:'end', fontSize:'12px' }} >
+                                    {tickValue}
+                                </text>
+                            </g>
+                        )}
+                        <text style={{ textAnchor:'end', fontSize:'15px'}} transform={`translate(80, -20)`}>
+                            {axisLable}
+                        </text>
+                    </g>
+                }
+            }
+            function XAxis(props) {
+                const { xScale, height, width, axisLable } = props;
+                if (typeof(xScale.domain()[0]) === "number"){
+                    return <g>
+                    {<line x1={0} y1={height} x2={width} y2={height} stroke='black'/>}
+                    {xScale.ticks().map(tickValue =>
+                        <g key={tickValue} transform={`translate(${xScale(tickValue)}, ${height})`}>
+                            <line y2={5} stroke='black' />
+                            <text style={{textAnchor: 'middle', fontSize:'12px' }} y={20}>
+                                {tickValue}
+                            </text>
+                        </g>
+                    )}
+                    <text style={{ textAnchor:'end', fontSize:'15px'}} transform={`translate(${width}, ${height-10})`}>
+                        {axisLable}
+                    </text>
+                </g>
+                }
+                else{
+                    return <g>
+                        {<line x1={0} y1={height} x2={width} y2={height} stroke='black'/>}
+                        {xScale.domain().map(tickValue =>
+                            <g key={tickValue+'B'} transform={`translate(${xScale(tickValue)}, 0)`}>
+                                <line y2={height} />
+                                <text style={{textAnchor: 'start', fontSize:'15px' }} x={8} y={height-8} transform={`rotate(75, 0, ${height+3})`}>
+                                    {tickValue}
+                                </text>
+                            </g>
+                        )}
+                    </g>
+                }
+            }
+            function Points(props) {
+                const {data, xScale, yScale, height, width, selectedState, setSelectedState,
+                    setTooltipX, setTooltipY} = props;
+
+                const getColor = (selectedState, state_name_full) => {
+                    return selectedState&&state_name_full===selectedState ? "orange" : "#45b4d4";
+                }
+                const getRadius = (selectedState, state_name_full) => {
+                    return selectedState&&state_name_full===selectedState ? 10 : 5;
+                }
+                if (selectedState===null) {
+                    return <g>
+                        {data.map(d => <circle key={d.state_name_full} cx={xScale(d.median_income)} 
+                        cy={yScale(d.median_income)} r={getRadius(selectedState, d.state_name_full)} stroke="black" 
+                        fill={getColor(selectedState, d.state_name_full)} 
+                        onMouseEnter={(event)=> {
+                            setSelectedState(d.state_name_full);
+                            setTooltipX(event.pageX);
+                            setTooltipY(event.pageY);
+                        }} 
+                        onMouseOut={()=> { 
+                            setSelectedState(null);
+                            setTooltipX(null);
+                            setTooltipY(null);
+                        }}/>
+                        )}
+                        </g>
+                } else {
+                    console.log(selectedState)
+                    return <g>
+                        {data.map(d => <circle key={d.state_name_full} cx={xScale(d.median_income)} 
+                        cy={yScale(d.median_income)} r={getRadius(selectedState, d.state_name_full)} stroke="black" 
+                        fill={getColor(selectedState, d.state_name_full)} 
+                        onMouseEnter={(event)=> {setSelectedState(d.state_name_full);}} 
+                        onMouseOut={()=> { setSelectedState(null);}}/>
+                        )}
+                        <rect key="cover" x={0} y={0} width={width} height={height} fill={"grey"} opacity={0.6}/>
+                        {data.filter(d => d.state_name_full===selectedState).map(d => <circle key={d.state_name_full} 
+                        cx={xScale(d.median_income)} cy={yScale(d.median_income)} r={getRadius(selectedState, d.state_name_full)} 
+                        stroke="black" fill={getColor(selectedState, d.state_name_full)} 
+                        onMouseEnter={(event) => {
+                            setSelectedState(d.state_name_full);
+                            setTooltipX(event.pageX);
+                            setTooltipY(event.pageY);
+                        }} 
+                        onMouseOut={(event)=> {
+                            setSelectedState(null);
+                            setTooltipX(null);
+                            setTooltipY(null);
+                        }}/>)}
+                        </g>
+                }
+            }
+            function ScatterPlot(props) {
+                const { offsetX, offsetY, data, xScale, yScale, height, width,
+                    selectedState, setSelectedState, setTooltipX, setTooltipY} = props;
+                return <g transform={`translate(${offsetX}, ${offsetY})`}>
+                        <Points data={data} xScale={xScale} yScale={yScale} 
+                        height={height} width={width} 
+                        selectedState={selectedState} 
+                        setSelectedState={setSelectedState}
+                        setTooltipX={setTooltipX} setTooltipY={setTooltipY}/>
+                        <YAxis yScale={yScale} height={height} axisLable_sca={"Median Household Income"}/>
+                        <XAxis xScale={xScale} height={height} width={width} axisLable={"Median Household Income"}/>
+                    </g>
+            }
+            function BarChart(props) {
+                const {offsetX, offsetY, data, xScale, yScale, height, width,
+                    selectedState, setSelectedState, setTooltipX, setTooltipY} = props;
+                return <g transform={`translate(${offsetX}, ${offsetY})`}>
+                    <Bars data={data} xScale={xScale} yScale={yScale} height={height}
+                    selectedState={selectedState} setSelectedState={setSelectedState}
+                    setTooltipX={setTooltipX} setTooltipY={setTooltipY}/>
+                    <YAxis yScale={yScale} height={height} axisLable={"West Region MHI"}/>
+                    <XAxis xScale={xScale} height={height} width={width} />
+                    </g>
+            }
+            function Bars(props) {
+                const {data, xScale, yScale, height, selectedState, setSelectedState,
+                    setTooltipX, setTooltipY} = props;
+                const getColor = (selectedState, state_name_full) => {
+                    return selectedState&&state_name_full===selectedState ? "orange" : "#45b4d4";
+                }
+                return <g>
+                    {data.map( d =>
+                    <rect key={d.state_name_full} x={xScale(d.state_name_full)} y={yScale(d.median_income)}
+                    width={xScale.bandwidth()} height={height-yScale(d.median_income)} stroke="black" 
+                    fill={getColor(selectedState, d.state_name_full)} 
+                    onMouseEnter={(event)=> {
+                        setSelectedState(d.state_name_full);
+                        setTooltipX(event.pageX);
+                        setTooltipY(event.pageY);
+                    }} 
+                    onMouseOut={()=> { 
+                        setSelectedState(null);
+                        setTooltipX(null);
+                        setTooltipY(null);
+                    }}/>
+                    )}
+                    </g>
+            }
+            function Tooltip(props) {
+                const {d, left, top} = props;
+
+                let pop_format = d3.format(","),
+                mhi_format = d3.format(",.2f");
+
+                if (left === null) {
+                    return <div></div>;
+                } else {
+                    const divStyle = {
+                        position: "absolute",
+                        textAlign: "center",
+                        width: "150px",
+                        height: "auto",
+                        padding: "2px",
+                        font: "15px sans-serif",
+                        background: "orange",
+                        border: "0px",
+                        borderRadius: "8px",
+                        pointerEvents: "none",
+                        left: `${left+10}px`,
+                        top: `${top}px`
+                    };
+                    return <div style={divStyle} >
+                        <p>Year: {d.year}</p>
+                        <p>State: {d.state_name_full}</p>
+                        <p>Total Population: {pop_format(d.population)}</p>
+                        <p>MHI: ${mhi_format(d.median_income)}</p>
+                    </div>
+                };  
+            }
+            function useData(csvPath, setData){
+                React.useEffect(() => {
+                    d3.csv(csvPath).then((data) => {
+                        data.forEach((d) => {
+                            d.median_income = +d.median_income;
+                        });
+                        setData(data, (prevState) => {
+                            console.log(prevState);
+                        });
+                    });
+                }, []);
+            }
+            const Charts = () => {
+                const [selectedState, setSelectedState] = React.useState(null);
+                const [tooltipX, setTooltipX] = React.useState(null);
+                const [tooltipY, setTooltipY] = React.useState(null);                
+                const [year, setYear] = React.useState('0');
+                const [dataAll, setDataAll] = React.useState([]);
+                
+                useData(csvUrl, setDataAll);
+
+                if (!dataAll) {
+                    return <pre>Loading...</pre>;
+                }
+
+                const WIDTH = 550;
+                const HEIGHT = 500;
+                const innerHeight = HEIGHT - margin.top - margin.bottom;
+                const innerWidth = WIDTH - margin.left - margin.right;
+
+                const YEAR = ['2020', '2019', '2018', '2017', '2016'];
+                const data = dataAll.filter( d => { 
+                    return d.year == YEAR[year] 
+                });
+
+                const changeHandler = (event) => {
+                    setYear(event.target.value);
+
+                    d3.csv(csvUrl).then((data) => {
+                        data.forEach((d) => {
+                            d.median_income = +d.median_income;
+                        });
+                        setDataAll(data);
+                    });
+                };
+
+                const selectedPoint = data.filter(d => d.state_name_full===selectedState)[0];
+
+                const xScaleScatter = d3.scaleLinear()
+                  .domain([0, 90000])
+                  .range([0, innerWidth])
+                  .nice();
+                const yScaleScatter = d3.scaleLinear()
+                  .domain([0, 90000])
+                  .range([innerHeight, 0])
+                  .nice();
+
+                const xScaleBar = d3.scaleBand()
+                  .domain(data.map(d => d.state_name_full))
+                  .range([innerWidth, 0]);
+                
+                const yScaleBar = d3.scaleLinear()
+                  .domain([0, 90000])
+                  .range([innerHeight, 0])
+                  .nice();
+
+                function sort_bart_chart_desc(){
+                    setDataAll(
+                        data.filter((d) => d.year == YEAR[year]).sort((x, y) => {
+                            return d3.ascending(x.median_income, y.median_income);
+                        })
+                    );
+                }
+                function sort_bart_chart_asce(){
+                    setDataAll(
+                        data.filter((d) => d.year == YEAR[year]).sort((x, y) => {
+                            return d3.descending(x.median_income, y.median_income);
+                        })
+                    );
+                }
+
+                return (
+                    <div id="infovis">
+                        <p>Use Range Slider to Switch Between Different Year</p>
+                        <div id="slider">
+                            <input key="slider" type='range' min='0' max='4' value={year} step='1' onChange={changeHandler}/>
+                            <input key="yearText" type="text" value={YEAR[year]} readOnly/>
+                        </div>
+                        <button onClick={sort_bart_chart_desc} id="sort_btn">Sort Current Barchart in Descending Order</button>
+                        <button onClick={sort_bart_chart_asce} id="sort_btn_2">Sort Current Barchart in Ascending Order</button>
+                        <svg width={WIDTH} height={HEIGHT} id="scatter">
+                        <g transform={`translate(${0}, ${50})`}>
+                            <ScatterPlot offsetX={margin.left} offsetY={margin.right} 
+                            data={data}
+                            xScale={xScaleScatter} yScale={yScaleScatter} 
+                            height={innerHeight} width={innerWidth}
+                            selectedState={selectedState} 
+                            setSelectedState={setSelectedState}
+                            setTooltipX={setTooltipX} setTooltipY={setTooltipY}/>
+                        </g>
+                        </svg>
+                        <svg width={WIDTH} height={HEIGHT} id="bar">
+                        <g transform={`translate(${0}, ${-150})`}>
+                            <BarChart offsetX={margin.left} offsetY={margin.top+margin.gap+innerHeight/2} 
+                            data={data} xScale={xScaleBar} 
+                            yScale={yScaleBar} height={innerHeight} width={innerWidth}
+                            selectedState={selectedState} 
+                            setSelectedState={setSelectedState} 
+                            setTooltipX={setTooltipX} setTooltipY={setTooltipY}/>
+                        </g>
+                        </svg>
+                        <Tooltip d={selectedPoint} left={tooltipX} top={tooltipY}/>
+                    </div>
+                )   
+            }
+           const rootElement = document.getElementById('root');
+           ReactDOM.render(<Charts/>, rootElement);
+        </script> 
+    </main>
+    <button type="button"> Feeling Different Today? </button>
+    <p id="date"></p>
+
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
