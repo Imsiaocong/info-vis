@@ -15,6 +15,16 @@
     <link rel="stylesheet" href="style.css" > 
 </head>
 <body>
+    <header>
+        <h1><a href="index.html">U.S. Median Household Income By Regions</a></h1>
+    </header>
+
+    <nav>
+        <a href="midwest.html">The Midwest</a>
+        <a href="northeast.html">The Northeast</a>
+        <a href="west.html">The West</a>
+        <a href="south.html">The South</a>
+    </nav>
     <div id="root"></div>
     <script type="text/babel">
     const csvUrl = 'data/median_household_income_per_state_west.csv';
@@ -46,7 +56,6 @@
     }
     function SymbolMap(props) {
         const {x, y, map, data, height, width, selectedState, setSelectedState} = props;
-        console.log(selectedState)
         const projection = d3.geoMercator().fitSize([3300, 1000], map);
         const path = d3.geoPath(projection);
         //const color = "red";
@@ -104,11 +113,11 @@
     }
 
     const GEOMAP = () => {
-        const [year, setYear] = React.useState('1');
+        const [year, setYear] = React.useState('0');
         const [selectedState, setSelectedState] = React.useState(null);
         const dataAll = useData(csvUrl);
         const map = useMap(mapUrl);
-        const YEAR = [2016,2017,2018,2019];
+        const YEAR = [2016,2017,2018,2019,2020];
         if (!map || !dataAll) {
                 return <pre>Loading...</pre>;
             };
@@ -131,7 +140,7 @@
         
         return <div>
             <div>
-                <input key="slider" type='range' min='2016' max='2019' value={year} step='1' onChange={changeHandler}/>
+                <input key="slider" type='range' min='0' max='4' value={year} step='1' onChange={changeHandler}/>
                 <input key="yearText" type="text" value={YEAR[year]} readOnly/>
             </div>
                 <svg width={WIDTH} height={HEIGHT}>
@@ -143,10 +152,6 @@
                     <Tooltip d={selectedPoint} stateYearData={stateYearData} left={innerWidth/2+margin.gap} top={margin.top+80+innerHeight/2} 
                 height={innerHeight/2} width={innerWidth/2}/>
                 </svg>
-            <div style={{position: "absolute", textAlign: "left", width: "240px",left:"40px", top:"40px"}}>
-                <h3>GEOMAP</h3>
-                <p>A visualization of MHI(Median Household Income) across the U.S.</p>
-            </div>
             
         </div>
     }
