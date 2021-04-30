@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CitiBike Stations</title>
+    <title>GEOMAP</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/d3-path.v2.min.js"></script>
     <script src="https://d3js.org/d3-shape.v2.min.js"></script>
@@ -17,7 +17,24 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
+    const csvUrl = 'data/median_household_income_per_state_west.csv';
     const mapUrl = "region/us_states_20m.json";
+    function useData(csvPath){
+        const [dataAll, setData] = React.useState(null);
+        React.useEffect(() => {
+            d3.csv(csvPath).then(data => {
+                data.forEach(d => {
+                    d.median_income = +d.median_income;
+                    d.year = +d.year;
+                    d.end = +d.end;
+                    d.cap_lati = +d.cap_lati;
+                    d.cap_long = +d.cap_long;
+                });
+                setData(data);
+            });
+        }, []);
+        return dataAll;
+    }
     function useMap(jsonPath) {
         const [data, setData] = React.useState(null);
         React.useEffect(() => {
@@ -28,22 +45,71 @@
         return data;
     }
     function SymbolMap(props) {
-        const {x, y, map, height, width} = props;
-		console.log(props)
-        const projection = d3.geoMercator().fitSize([1200*2, 800*2], map);
+        const {x, y, map, data, height, width, selectedState, setSelectedState} = props;
+        console.log(selectedState)
+        const projection = d3.geoMercator().fitSize([3300, 1000], map);
         const path = d3.geoPath(projection);
         //const color = "red";
-            return <g transform={`translate(${x}, ${y-500})`}>
+        const radius = d3.scaleLinear().range([2, 20])
+            .domain([d3.min(data, d => d.median_income), d3.max(data, d => d.median_income)]);
+
+        const mouseOver = d => {
+                setSelectedState(d.state);
+
+        };
+        const mouseOut = () => {
+                setSelectedState(null);
+        };
+
+        const getColor = (selectedState, state) => {
+                    return selectedState&&state===selectedState ? "steelblue" : "red";
+                }
+
+        if (selectedState === null) {
+            return <g transform={`translate(${x}, ${y})`}>
             {map.features.map((feature, idx) => {
                 return <path key={idx+"boundary"} className={"boundary"} d={path(feature)} />
             })}
+            {data.map(d => {
+                const [x, y] =  projection([d.cap_long, d.cap_lati]);
+                return <circle key={"state" + d.cap_long + d.cap_lati} cx={x} cy={y} r={radius(d.median_income)} opacity={0.7} fill={getColor(selectedState, d.state)} stroke={"black"} onMouseOver={() => mouseOver(d)} onMouseOut={mouseOut}/>
+            })}
             </g>
+        }else{
+            return <g transform={`translate(${x}, ${y})`}>
+            {map.features.map((feature, idx) => {
+                return <path key={idx+"boundary"} className={"boundary"} d={path(feature)} />
+            })}
+            {data.map(d => {
+                const [x, y] =  projection([d.cap_long, d.cap_lati]);
+                return <circle key={"state" + d.cap_long + d.cap_lati} cx={x} cy={y} r={radius(d.median_income)} opacity={0.7} fill={getColor(selectedState, d.state)} stroke={"black"} onMouseOver={() => mouseOver(d)} onMouseOut={mouseOut}/>
+            })}
+            {data.filter(d => d.station === selectedState).map(d => {
+                const [x, y] =  projection([d.cap_long, d.cap_lati]);
+                return <circle key={"state" + d.cap_long + d.cap_lati} cx={x} cy={y} r={radius(d.median_income)} opacity={0.7} fill={getColor(selectedState, d.state)} stroke={"black"} onMouseOver={() => mouseOver(d)} onMouseOut={mouseOut}/>
+            })}
+            </g>
+        }
+    }
+    
+    function Tooltip(props) {
+        const {d, stateYearData, left, top, height, width} = props;
+        if (!d) {
+            return <g></g>;
+        } else {
+            return <g transform={`translate(${left}, ${top})`}>
+                    <text style={{ textAnchor:'median_income', fontSize:'15px'}}  transform={`translate(${0}, ${-5})rotate(0)`}>{d.state} </text>
+                </g>
+        };  
     }
 
-
-    const CitiBike = () => {
+    const GEOMAP = () => {
+        const [year, setYear] = React.useState('1');
+        const [selectedState, setSelectedState] = React.useState(null);
+        const dataAll = useData(csvUrl);
         const map = useMap(mapUrl);
-        if (!map) {
+        const YEAR = [2016,2017,2018,2019];
+        if (!map || !dataAll) {
                 return <pre>Loading...</pre>;
             };
         const WIDTH = 1200;
@@ -51,17 +117,40 @@
         const margin = { top: 20, right: 40, bottom: 160, left: 40, gap:40 };
         const innerWidth = WIDTH - margin.left - margin.right - margin.gap;
         const innerHeight = HEIGHT - margin.top - margin.bottom - margin.gap;
+        const data = dataAll.filter( d => {
+            return d.year === YEAR[year];
+        });
+        // Note: stateYearData is the data of the year of a seleted state. 
+        const stateYearData = dataAll.filter( d=> {
+            return d.state == selectedState;
+        }); 
+        const changeHandler = (event) => {
+                    setYear(event.target.value);
+                }
+        const selectedPoint = dataAll.filter(d => d.state===selectedState)[0];
+        
         return <div>
+            <div>
+                <input key="slider" type='range' min='2016' max='2019' value={year} step='1' onChange={changeHandler}/>
+                <input key="yearText" type="text" value={YEAR[year]} readOnly/>
+            </div>
                 <svg width={WIDTH} height={HEIGHT}>
                     <g>
-                        <SymbolMap x={margin.left} y={margin.top} height={innerHeight+margin.gap} 
-                        width={innerWidth/2} map={map}/>
+                        <SymbolMap x={margin.left} y={margin.top - 80} height={innerHeight+margin.gap} 
+                        width={innerWidth/2} data={data} map={map} selectedState={selectedState} 
+                        setSelectedState={setSelectedState}/>
                     </g>
+                    <Tooltip d={selectedPoint} stateYearData={stateYearData} left={innerWidth/2+margin.gap} top={margin.top+80+innerHeight/2} 
+                height={innerHeight/2} width={innerWidth/2}/>
                 </svg>
+            <div style={{position: "absolute", textAlign: "left", width: "240px",left:"40px", top:"40px"}}>
+                <h3>GEOMAP</h3>
+                <p>A visualization of MHI(Median Household Income) across the U.S.</p>
+            </div>
             
         </div>
     }
-    ReactDOM.render( <CitiBike />, document.getElementById('root'));
+    ReactDOM.render( <GEOMAP />, document.getElementById('root'));
     </script>
     </body>
     </html>
